@@ -1,4 +1,5 @@
 import pytest
+from qa_automation.config import Config
 from utils.api.client import ApiClient
 from playwright.sync_api import sync_playwright
 
@@ -7,7 +8,7 @@ from playwright.sync_api import sync_playwright
 
 @pytest.fixture(scope="session")
 def api_base_url():
-    return "https://jsonplaceholder.typicode.com"
+    return Config.BASE_API_URL
 
 
 @pytest.fixture()
@@ -27,7 +28,7 @@ def pw():
 
 @pytest.fixture()
 def page(pw):
-    browser = pw.chromium.launch(headless=True)
+    browser = pw.chromium.launch(headless=Config.HEADLESS)
     page = browser.new_page()
     yield page
     browser.close()

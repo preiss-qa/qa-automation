@@ -1,4 +1,4 @@
-from config import Config
+from qa_automation.config import Config
 
 
 class LoginPage:

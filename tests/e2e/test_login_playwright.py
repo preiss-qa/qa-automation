@@ -1,6 +1,6 @@
 import pytest
-from config import Config
-from pages.login_page import LoginPage
+from qa_automation.config import Config
+from qa_automation.pages.login_page import LoginPage
 
 
 @pytest.mark.e2e
