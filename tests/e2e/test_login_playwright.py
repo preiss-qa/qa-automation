@@ -1,16 +1,23 @@
 import pytest
-
-URL = "https://the-internet.herokuapp.com/login"
-USERNAME = "tomsmith"
-PASSWORD = "SuperSecretPassword!"
+from config import Config
+from pages.login_page import LoginPage
 
 
 @pytest.mark.e2e
 @pytest.mark.smoke
 def test_login_success(page):
-    page.goto(URL)
-    page.locator("#username").fill(USERNAME)
-    page.locator("#password").fill(PASSWORD)
-    page.locator("button[type='submit']").click()
+    login = LoginPage(page)
+    login.open()
+    login.login(Config.USERNAME, Config.PASSWORD)
 
-    assert "secure area" in page.locator("#flash").inner_text().lower()
+    assert "secure area" in login.flash_text()
+
+
+@pytest.mark.e2e
+@pytest.mark.regression
+def test_login_invalid_credentials(page):
+    login = LoginPage(page)
+    login.open()
+    login.login("wrong_user", "wrong_password")
+
+    assert login.is_error_message()
