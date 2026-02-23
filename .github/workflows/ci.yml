@@ -1,35 +1,56 @@
 name: CI
 
 on:
-  pull_request:
   push:
-    branches: [ "main" ]
+  pull_request:
 
 jobs:
-  smoke:
+  api-tests:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
+        run: python -m pip install -r requirements.txt
 
-      - name: Run smoke tests
-        run: |
-          python -m pytest -m smoke --html=report.html
+      - name: Run API tests
+        run: pytest -m api -v --html=report-api.html
 
-      - name: Upload HTML report
+      - name: Upload API report
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-html-report
-          path: report.html
+          name: report-api
+          path: report-api.html
+
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: python -m playwright install --with-deps
+
+      - name: Run E2E tests
+        run: pytest -m e2e -v --html=report-e2e.html
+
+      - name: Upload E2E report
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-e2e
+          path: report-e2e.html

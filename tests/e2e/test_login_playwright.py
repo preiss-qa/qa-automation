@@ -20,4 +20,4 @@ def test_login_invalid_credentials(page):
     login.open()
     login.login("wrong_user", "wrong_password")
 
-    assert login.is_error_message()
+    assert login.is_invalid_credentials_error()

@@ -2,64 +2,203 @@
 
 ![CI](https://github.com/preiss-qa/qa-automation/actions/workflows/ci.yml/badge.svg)
 
-A structured test automation project using **Python**, **pytest**, and **Playwright**.
-Includes API tests, browser-based E2E tests, test tagging (smoke/regression), and CI execution via GitHub Actions.
+CI Status: Smoke tests are executed automatically on every push.
 
-## Tech Stack
-- Python
-- pytest
-- requests (API)
-- Playwright (E2E)
-- GitHub Actions (CI)
-- pytest-html (report)
+A production-grade QA automation framework combining API contract testing and browser-based E2E testing.  
+Built with scalability, maintainability, and CI integration in mind.
 
-## Project Structure
-- `tests/api/` API tests
-- `tests/e2e/` E2E browser tests
-- `tests/conftest.py` shared pytest fixtures (API client + Playwright page)
-- `utils/api/` reusable API client
-- `pages/` Page Objects for E2E maintainability
-- `config.py` central configuration (URLs, credentials, headless mode)
+---
 
-## Run Locally
+## 🚀 Overview
 
-### Setup
-Create and activate venv (Windows PowerShell):
-- `python -m venv venv`
-- `.\venv\Scripts\Activate.ps1`
+This project demonstrates how to design and implement a structured and scalable test automation framework using modern tools and clean architecture principles.
 
-Install dependencies:
-- `python -m pip install -r requirements.txt`
+It includes:
 
-Install Playwright browsers:
-- `python -m playwright install`
+- API contract validation using Pydantic
+- Browser-based E2E testing using Playwright
+- Marker-based suite selection (smoke / regression / api / e2e)
+- Automated CI execution via GitHub Actions
+- HTML reporting for local and CI runs
+
+The goal is to showcase professional QA automation practices beyond basic test scripting.
+
+---
+
+## 🛠 Tech Stack
+
+- **Python**
+- **pytest**
+- **requests** (API testing)
+- **Playwright** (E2E browser automation)
+- **Pydantic** (API contract validation)
+- **pytest-html** (report generation)
+- **GitHub Actions** (CI/CD)
+
+---
+
+## 🏗 Architecture & Design Principles
+
+This framework follows several professional automation patterns:
+
+- Separation of API and UI test layers
+- Page Object Pattern for E2E maintainability
+- Central configuration management
+- Reusable pytest fixtures
+- Marker-based test selection
+- Contract-based API validation
+- CI-integrated quality gates
+
+---
+
+## 📂 Project Structure
+
+```
+qa_automation/
+│
+├── models/              # Pydantic models for API contract validation
+├── utils/               # Reusable API helpers
+├── pages/               # Page Objects for E2E tests
+│
+tests/
+├── api/                 # API contract tests
+├── e2e/                 # Browser-based E2E tests
+└── conftest.py          # Shared fixtures (API base URL, Playwright page)
+
+.github/
+└── workflows/           # CI configuration
+```
+
+---
+
+## 🧪 Testing Strategy
+
+This project follows the **Test Pyramid** approach:
+
+- ✅ API tests for fast and stable backend validation  
+- ✅ E2E tests for critical user flows  
+- ✅ Smoke suite for CI quality gate  
+- ✅ Regression suite for full validation  
+
+### API Contract Testing
+
+API responses are validated against strict Pydantic models to ensure:
+
+- Correct response structure
+- Required fields are present
+- Correct data types
+- Stable API contracts
+
+If the API structure changes unexpectedly, tests fail immediately.
+
+---
+
+## ▶️ Local Setup (Windows PowerShell)
+
+### 1️⃣ Create virtual environment
+
+```
+python -m venv .venv
+.\.venv\Scripts\activate
+```
+
+### 2️⃣ Install dependencies
+
+```
+python -m pip install -r requirements.txt
+```
+
+### 3️⃣ Install Playwright browsers
+
+```
+python -m playwright install
+```
+
+---
+
+## ▶️ Running Tests
 
 ### Run all tests
-- `python -m pytest -q`
 
-### Run suites by marker
-API only:
-- `python -m pytest -q -m api`
+```
+pytest -q
+```
 
-E2E only:
-- `python -m pytest -q -m e2e`
+### Run API tests only
 
-Smoke suite (fast checks):
-- `python -m pytest -q -m smoke`
+```
+pytest -m api -q
+```
 
-Regression suite:
-- `python -m pytest -q -m regression`
+### Run E2E tests only
 
-### Generate HTML report
-- `python -m pytest --html=report.html`
+```
+pytest -m e2e -q
+```
 
-## CI (GitHub Actions)
-A GitHub Actions workflow runs the **smoke suite** on every push to `main` and on pull requests.
-The HTML report is uploaded as a workflow artifact.
+### Run smoke suite
 
-## Notes
-This project demonstrates maintainable test automation patterns:
-- central config
-- reusable fixtures
-- Page Object Pattern for UI tests
-- marker-based suite selection for CI strategy
+```
+pytest -m smoke -q
+```
+
+### Run regression suite
+
+```
+pytest -m regression -q
+```
+
+---
+
+## 📊 HTML Reporting
+
+Generate a local test report:
+
+```
+pytest --html=report.html
+```
+
+The report includes:
+
+- Test summary
+- Execution time
+- Pass / Fail overview
+- Environment metadata
+
+CI reports are uploaded as workflow artifacts.
+
+---
+
+## ⚙ Continuous Integration (GitHub Actions)
+
+The CI pipeline:
+
+- Runs automatically on push and pull requests
+- Executes smoke tests as a quality gate
+- Uploads HTML reports as artifacts
+- Ensures reproducible test execution in a clean environment
+
+Smoke tests act as a **quality gate** before changes are considered stable.
+
+---
+
+## 🎯 What This Repository Demonstrates
+
+- Structured QA automation design
+- Clean separation of concerns
+- API contract validation
+- Scalable test architecture
+- CI-integrated automation strategy
+- Professional repository documentation
+
+---
+
+## 👤 Author
+
+QA Automation Engineer focused on:
+
+- API testing
+- E2E automation
+- Test architecture design
+- CI/CD integration
+- Quality engineering best practices
