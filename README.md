@@ -2,10 +2,21 @@
 
 ![CI](https://github.com/preiss-qa/qa-automation/actions/workflows/ci.yml/badge.svg)
 
-CI Status: Smoke tests are executed automatically on every push.
+CI Status: API and E2E test suites are executed automatically on every push. Smoke tests act as a quality gate.
 
 A production-grade QA automation framework combining API contract testing and browser-based E2E testing.  
 Built with scalability, maintainability, and CI integration in mind.
+
+---
+
+## Architecture Overview
+
+This framework is structured in layers:
+
+- **API layer** (pytest + requests) for fast backend validation
+- **Contract validation layer** (Pydantic models) to detect breaking API changes
+- **E2E layer** (Playwright + Page Object Model) for critical user journeys
+- **CI quality gate** (GitHub Actions) running API and E2E suites with HTML reports as artifacts
 
 ---
 
@@ -21,7 +32,7 @@ It includes:
 - Automated CI execution via GitHub Actions
 - HTML reporting for local and CI runs
 
-The goal is to showcase professional QA automation practices beyond basic test scripting.
+The framework demonstrates production-style QA automation design with clean architecture and CI-integrated quality gates.
 
 ---
 
