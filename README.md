@@ -20,6 +20,24 @@ This framework is structured in layers:
 
 ---
 
+### Simple Architecture Diagram
+
+```text
+Developer
+   |
+   v
+pytest
+ ├─ API tests (requests)
+ │    └─ Contract validation (Pydantic models)
+ └─ E2E tests (Playwright)
+      └─ Page Object Model
+   |
+   v
+GitHub Actions CI
+ ├─ API job → report-api
+ └─ E2E job → report-e2e
+```
+
 ## 🚀 Overview
 
 This project demonstrates how to design and implement a structured and scalable test automation framework using modern tools and clean architecture principles.
